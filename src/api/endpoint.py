@@ -28,7 +28,7 @@ router = APIRouter()
 @router.get("/")
 async def ping():
     """simple health check used by ecs"""
-    return {"message": "pong"}
+    return {"message": "pong new"}
 
 
 @router.post("/upload-pdf")
