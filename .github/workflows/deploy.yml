@@ -59,6 +59,8 @@ jobs:
           context: .
           push: true
           platforms: linux/arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: |
             ${{ steps.image-uri.outputs.image_uri }}
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
