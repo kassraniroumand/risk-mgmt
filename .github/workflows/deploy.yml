@@ -72,10 +72,10 @@ jobs:
           echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_ENV
           echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_OUTPUT
 #
-#      - name: Deploy new revision to ECS service
-#        run: |
-#          aws ecs update-service \
-#            --cluster $ECS_CLUSTER \
-#            --service $ECS_SERVICE \
-#            --task-definition ${{ steps.register-task.outputs.TASK_DEF_ARN }} \
-#            --force-new-deployment
+      - name: Deploy new revision to ECS service
+        run: |
+          aws ecs update-service \
+            --cluster $ECS_CLUSTER \
+            --service $ECS_SERVICE \
+            --task-definition ${{ steps.register-task.outputs.TASK_DEF_ARN }} \
+            --force-new-deployment
