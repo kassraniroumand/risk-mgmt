@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: ai-reporter-api
+    ports:
+      - "8000:80"            # host:container
+    environment:
+      AWS_REGION: eu-west-1   # avoids NoRegionError during local dev
+      # uncomment to pass a single secret that you fetched locally
+      # GROQ_API_KEY: ${GROQ_API_KEY}
+    volumes:
+      # share your AWS credentials for boto3 to work locally
+      - ~/.aws:/.aws:ro
+      # optional: mount a host folder for temporary uploads/logs
+      - ./data:/tmp
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

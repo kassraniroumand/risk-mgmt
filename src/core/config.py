@@ -26,14 +26,15 @@ class Settings:
         self.GROQ_API_KEY = get_parameter("/ai-reporter/prod/groq_api_key")
         # s3 config
         self.S3_BUCKET = get_parameter("/ai-reporter/prod/s3_bucket")
+        # self.S3_BUCKET = "ai-reporter-prod-s3-bucket"
         # aws region
-        self.AWS_REGION = get_parameter("/ai-reporter/prod/aws_region")
+        self.AWS_REGION = "us-east-1"
         # pre fetch the rate
-        self.EXCHANGE_RATES = {
-            "EUR": float(get_parameter("/ai-reporter/prod/exchange_rate_eur")),
-            "USD": float(get_parameter("/ai-reporter/prod/exchange_rate_usd")),
-            "GBP": float(get_parameter("/ai-reporter/prod/exchange_rate_gbp")),
-        }
+        # self.EXCHANGE_RATES = {
+        #     "EUR": float(get_parameter("/ai-reporter/prod/exchange_rate_eur")),
+        #     "USD": float(get_parameter("/ai-reporter/prod/exchange_rate_usd")),
+        #     "GBP": float(get_parameter("/ai-reporter/prod/exchange_rate_gbp")),
+        # }
 
 # module level singleton like singleton pattern
 settings = Settings()
