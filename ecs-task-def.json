@@ -1,25 +1,36 @@
 {
-  "family": "ai-report",
-  "cpu": "256",
-  "memory": "512",
+  "family": "ai-report",          // e.g. same as $ECS_TASK_FAMILY,
+  "executionRoleArn": "arn:aws:iam::123456789012:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::123456789012:role/ecsTaskRole",
   "networkMode": "awsvpc",
-  "requiresCompatibilities": ["FARGATE"],
+
+  /* crucial for ARM64 tasks */
   "runtimePlatform": {
-    "cpuArchitecture": "ARM64",
-    "operatingSystemFamily": "LINUX"
+    "operatingSystemFamily": "LINUX",
+    "cpuArchitecture": "ARM64"
   },
-  "executionRoleArn": "arn:aws:iam::762233768894:role/ecsTaskExecutionRole",
+
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+
   "containerDefinitions": [
     {
-      "name": "fastapi",
-      "image": "REPLACE_IMAGE_URI",
+      "name": "app",
+      "image": "REPLACE_IMAGE_URI",              // <<< replaced by sed step
       "portMappings": [
-        {
-          "containerPort": 80,
-          "protocol": "tcp"
-        }
+        { "containerPort": 3000, "protocol": "tcp" }
       ],
-      "essential": true
+      "essential": true,
+
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-region": "us-east-1",
+          "awslogs-group": "/ecs/REPLACE_WITH_YOUR_FAMILY",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
     }
   ]
 }
