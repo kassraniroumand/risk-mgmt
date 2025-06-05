@@ -58,19 +58,19 @@ jobs:
             ${{ env.IMAGE_URI }}
             ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
 
-#      - name: Prepare new ECS task definition
-#        run: |
-#          sed "s|REPLACE_IMAGE_URI|${{ env.IMAGE_URI }}|" ecs-task-def.json > new-task-def.json
-#
-#      - name: Register new ECS task definition
-#        id: register-task
-#        run: |
-#          TASK_DEF_ARN=$(aws ecs register-task-definition \
-#            --cli-input-json file://new-task-def.json \
-#            --query 'taskDefinition.taskDefinitionArn' \
-#            --output text)
-#          echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_ENV
-#          echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_OUTPUT
+      - name: Prepare new ECS task definition
+        run: |
+          sed "s|REPLACE_IMAGE_URI|${{ env.IMAGE_URI }}|" ecs-task-def.json > new-task-def.json
+
+      - name: Register new ECS task definition
+        id: register-task
+        run: |
+          TASK_DEF_ARN=$(aws ecs register-task-definition \
+            --cli-input-json file://new-task-def.json \
+            --query 'taskDefinition.taskDefinitionArn' \
+            --output text)
+          echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_ENV
+          echo "TASK_DEF_ARN=$TASK_DEF_ARN" >> $GITHUB_OUTPUT
 #
 #      - name: Deploy new revision to ECS service
 #        run: |

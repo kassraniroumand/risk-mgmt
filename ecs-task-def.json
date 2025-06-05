@@ -1,5 +1,5 @@
 {
-  "family": "fastapi-task",
+  "family": "ai-report",
   "cpu": "256",
   "memory": "512",
   "networkMode": "awsvpc",
@@ -8,7 +8,7 @@
     "cpuArchitecture": "ARM64",
     "operatingSystemFamily": "LINUX"
   },
-  "executionRoleArn": "arn:aws:iam::762233768894:role/administratorAccess",
+  "executionRoleArn": "arn:aws:iam::762233768894:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
       "name": "fastapi",
