@@ -1,61 +1,35 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:762233768894:task-definition/ai-report:1",
-    "containerDefinitions": [
+  "family": "ai-report",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "3072",
+  "runtimePlatform": {
+    "cpuArchitecture": "ARM64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "executionRoleArn": "arn:aws:iam::762233768894:role/ecsTaskExecutionRole",
+  "taskRoleArn":     "arn:aws:iam::762233768894:role/ecsTaskExecutionRole",
+  "containerDefinitions": [
+    {
+      "name": "ai-report",
+      "image": "762233768894.dkr.ecr.us-east-1.amazonaws.com/risk-mgmt:latest",
+      "essential": true,
+      "portMappings": [
         {
-            "name": "ai-report",
-            "image": "REPLACE_IMAGE_URI",
-            "cpu": 0,
-            "portMappings": [
-                {
-                    "name": "ai-report-80-tcp",
-                    "containerPort": 80,
-                    "hostPort": 80,
-                    "protocol": "tcp",
-                    "appProtocol": "http"
-                }
-            ],
-            "essential": true,
-            "environment": [],
-            "environmentFiles": [],
-            "mountPoints": [],
-            "volumesFrom": [],
-            "ulimits": [],
-            "logConfiguration": {
-                "logDriver": "awslogs",
-                "options": {
-                    "awslogs-group": "/ecs/ai-report",
-                    "mode": "non-blocking",
-                    "awslogs-create-group": "true",
-                    "max-buffer-size": "25m",
-                    "awslogs-region": "us-east-1",
-                    "awslogs-stream-prefix": "ecs"
-                },
-                "secretOptions": []
-            },
-            "systemControls": []
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
         }
-    ],
-    "family": "ai-report",
-    "taskRoleArn": "arn:aws:iam::762233768894:role/ecsTaskExecutionRole",
-    "executionRoleArn": "arn:aws:iam::762233768894:role/ecsTaskExecutionRole",
-    "networkMode": "awsvpc",
-    "volumes": [],
-    "placementConstraints": [],
-    "compatibilities": [
-        "EC2",
-        "FARGATE"
-    ],
-    "requiresCompatibilities": [
-        "FARGATE"
-    ],
-    "cpu": "1024",
-    "memory": "3072",
-    "runtimePlatform": {
-        "cpuArchitecture": "ARM64",
-        "operatingSystemFamily": "LINUX"
-    },
-    "registeredAt": "2025-06-05T13:10:53.693Z",
-    "registeredBy": "arn:aws:iam::762233768894:root",
-    "enableFaultInjection": false,
-    "tags": []
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/ai-report",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
 }
