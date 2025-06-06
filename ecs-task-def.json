@@ -40,7 +40,6 @@
     "executionRoleArn": "arn:aws:iam::762233768894:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "volumes": [],
-    "status": "ACTIVE",
     "requiresAttributes": [
         {
             "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
